@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>enter、update、exit</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<p></p>
+	<p></p>
+	<p></p>
+	<script type="text/javascript" src="../lib/d3/d3.min.js"></script>
+	<script type="text/javascript">
+		var dataset = [3,6,9,12,15];
+		//选择body中的p元素
+		var p = d3.select("body").selectAll("p");
+		//获取update部分
+		var update = p.data(dataset);
+		//获取enter部分
+		var enter = update.enter();
+
+		//update部分的处理：更新属性值
+		update.text(function(d){
+			return "update "+d;
+		})
+
+		//enter部分的处理：添加元素后赋予属性值
+		enter.append("p").text(function(d){
+			return "enter "+d
+		})
+
+		// 现在 body 中有三个 p 元素，要绑定一个长度小于 3 的数组到 p 的选择集上，然后分别处理 update 和 exit 两部分。
+		var dataset1 = [3];
+		//选择body中的p元素
+		var pDom = d3.select("body").selectAll("p");
+		//获取update部分
+		var update = p.data(dataset1);
+		//获取exit部分
+		var exit = update.exit();
+		//update部分的处理：更新属性值
+		update.text(function(d){
+			return "update "+d;
+		})
+
+		//exit部分的处理：修改p元素的属性
+		// exit.text(function(d){
+		// 	return "exit";
+		// })
+
+		//exit部分的处理通常是删除元素
+		exit.remove()
+	</script>
+</body>
+</html>
